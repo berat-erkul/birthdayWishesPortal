@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Kullanıcı Güncelle</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #111827;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    input, select {
+      padding: 0.75rem;
+      margin-bottom: 1.25rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Kullanıcı Güncelle</h2>
+
+  <form th:action="@{/userDTO/update}" th:object="${userDTO}" method="post">
+    <label for="firstName">Ad</label>
+    <input type="text" id="firstName" th:field="*{firstName}" required />
+
+    <label for="lastName">Soyad</label>
+    <input type="text" id="lastName" th:field="*{lastName}" required />
+
+    <label for="email">Email</label>
+    <input type="email" id="email" th:field="*{email}" required />
+
+    <label for="password">Şifre</label>
+    <input type="password" id="password" th:field="*{password}" required />
+
+    <label for="birthday">Doğum Günü</label>
+    <input type="date" id="birthday" th:field="*{birthday}" required />
+
+    <label for="role">Rol</label>
+    <select id="role" th:field="*{role}" required>
+      <option value="">Rol Seçin</option>
+      <option value="STUDENT">Öğrenci</option>
+      <option value="TEACHER">Öğretmen</option>
+      <option value="ADMIN">Admin</option>
+    </select>
+
+    <button type="submit">Güncelle</button>
+  </form>
+</div>
+
+</body>
+</html>

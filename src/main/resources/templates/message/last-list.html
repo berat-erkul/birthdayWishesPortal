@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesajlar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f9fafb;
+            padding: 2rem;
+        }
+
+        .message-container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .message-card {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-header {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-date {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-content {
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .reply-box {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background-color: #f0fdf4;
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+        }
+
+        .reply-header {
+            font-weight: bold;
+            color: #065f46;
+            margin-bottom: 0.25rem;
+        }
+
+        .reply-content {
+            color: #065f46;
+        }
+    </style>
+</head>
+<body>
+
+<div class="message-container">
+    <h2 style="text-align: center; margin-bottom: 2rem;">Son Mesajlar</h2>
+
+    <div th:each="msg : ${messages}" class="message-card">
+        <div class="message-header" th:text="'Gönderen: ' + ${msg.sender.firstName} + ' ' + ${msg.sender.lastName}">Gönderen</div>
+        <div class="message-date" th:text="${#temporals.format(msg.sentDate, 'dd.MM.yyyy')}">Tarih</div>
+        <div class="message-content" th:text="${msg.content}">Mesaj içeriği</div>
+        <button th:href="@{/}" >Yanıt Yaz </button>
+        <div class="reply-box" th:if="${msg.replyToMessage != null}">
+            <div class="reply-header" th:text="'Yanıtlayan: ' + ${msg.replyToMessage.sender.firstName} + ' ' + ${msg.replyToMessage.sender.lastName}">Yanıtlayan</div>
+            <div class="reply-content" th:text="${msg.replyToMessage.content}">Yanıt içeriği</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
