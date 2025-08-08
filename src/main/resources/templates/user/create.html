@@ -62,7 +62,7 @@
 
 <div class="form-container">
   <h2>Kullanıcı Oluştur</h2>
-  <form th:action="@{/userDTO/create}" method="post" th:object="${userDTO}">
+  <form th:action="@{/user/create}" method="post" th:object="${user}">
 
     <label for="firstName">Ad</label>
     <input type="text" th:field="*{firstName}" id="firstName" />

@@ -1,4 +1,4 @@
-package com.cydeo.mapper;
+package beraterkul.birthdaywishesportal.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

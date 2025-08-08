@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class UserController {
 
@@ -29,26 +26,20 @@ public class UserController {
 
     @PostMapping("/user/create")
     public String create(@ModelAttribute("user") UserDTO userDTO, Model model) {
-
         userService.save(userDTO);
-        model.addAttribute("users", userDTOS);
-
-
-        return "user/list";
-        // createUser()
+        return "redirect:/user/list";
     }
 
-
+    //********************************
     @GetMapping("/user/update/{id}")
-    public String update(@PathVariable("id") String id, Model model) {
+    public String update(@PathVariable("id") Long id, Model model) {
 
-        //We'll check if the user exists in our list
-        //Then we'll present the form with the user's data
 
         return "user/update"; // Aynı form, ama dolu haliyle
         // findByUserID(String id)
     }
 
+    //********************************
     @PostMapping("/user/update/{id}")
     public String update(@PathVariable("id") String id, @ModelAttribute("user") UserDTO userDTO, Model model) {
 
@@ -58,6 +49,7 @@ public class UserController {
         // updateUserByID(UserDTO userDTO, String id)
     }
 
+    //********************************
     @GetMapping("/user/delete/{id}")
     public String delete(@PathVariable("id") String id, Model model) {
 
@@ -67,6 +59,12 @@ public class UserController {
         // deleteUserByID(String id)
     }
 
+
+    @GetMapping("/user/list")
+    public String list(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "user/list";
+    }
 
 
 }

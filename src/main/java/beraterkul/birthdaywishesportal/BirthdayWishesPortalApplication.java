@@ -15,7 +15,7 @@ public class BirthdayWishesPortalApplication {
     }
 
     @Bean
-    public ModelMapper maper(){
+    public ModelMapper modelMapper(){
         return new ModelMapper();
     }
 }

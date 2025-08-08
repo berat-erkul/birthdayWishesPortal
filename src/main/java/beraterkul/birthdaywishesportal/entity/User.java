@@ -4,8 +4,15 @@ import beraterkul.birthdaywishesportal.enums.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
+
+@NoArgsConstructor
+@Getter
+@Setter
 
 @Entity
 @Table(name = "users")
