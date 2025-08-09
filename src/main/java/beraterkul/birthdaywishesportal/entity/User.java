@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
+@Where(clause = "deleted = false")
 public class User extends BaseEntity {
 
     @Column(nullable = false)

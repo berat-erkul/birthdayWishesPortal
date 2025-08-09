@@ -1,52 +1,59 @@
-//ckage beraterkul.birthdaywishesportal.service.impl;
+//package beraterkul.birthdaywishesportal.service.impl;
 //
-//port beraterkul.birthdaywishesportal.dto.MessageDTO;
-//port beraterkul.birthdaywishesportal.repository.MessageRepository;
-//port beraterkul.birthdaywishesportal.service.MessageService;
-//port org.springframework.stereotype.Service;
+//import beraterkul.birthdaywishesportal.dto.MessageDTO;
+//import beraterkul.birthdaywishesportal.mapper.MapperUtil;
+//import beraterkul.birthdaywishesportal.repository.MessageRepository;
+//import beraterkul.birthdaywishesportal.service.MessageService;
+//import org.springframework.stereotype.Service;
 //
-//port java.time.LocalDate;
-//port java.util.List;
+//import java.time.LocalDate;
+//import java.util.List;
 //
-//ervice
-//blic class MessageServiceImpl implements MessageService {
+//@Service
+//public class MessageServiceImpl implements MessageService {
 //
-//  private final MessageRepository messageRepository;
+//    private final MessageRepository messageRepository;
+//    private final MapperUtil mapper;
 //
-//  public MessageServiceImpl(MessageRepository messageRepository) {
-//      this.messageRepository = messageRepository;
-//  }
+//    public MessageServiceImpl(MessageRepository messageRepository, MapperUtil mapper) {
+//        this.messageRepository = messageRepository;
+//        this.mapper = mapper;
+//    }
 //
-//  @Override
-//  public List<MessageDTO> findAll() {
-//      return List.of();
-//  }
+//    @Override
+//    public List<MessageDTO> findAll() {
 //
-//  @Override
-//  public List<MessageDTO> findByUserId(Long id) {
-//      return List.of();
-//  }
+//        List<MessageDTO> messa
 //
-//  @Override
-//  public List<MessageDTO> findAllBySenderId(Long id) {
-//      return List.of();
-//  }
+//        return List.of();
+//    }
 //
-//  @Override
-//  public List<MessageDTO> findBySentDateAfter(LocalDate date) {
-//      return List.of();
-//  }
+//    @Override
+//    public List<MessageDTO> findByUserId(Long id) {
+//        return List.of();
+//    }
 //
-//  @Override
-//  public MessageDTO getById(Long id) {
-//      return null;
-//  }
+//    @Override
+//    public List<MessageDTO> findAllBySenderId(Long id) {
+//        return List.of();
+//    }
 //
-//  @Override
-//  public MessageDTO save(MessageDTO message) {
-//      return null;
-//  }
+//    @Override
+//    public List<MessageDTO> findBySentDateAfter(LocalDate date) {
+//        return List.of();
+//    }
 //
+//    @Override
+//    public MessageDTO getById(Long id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public MessageDTO save(MessageDTO message) {
+//        return null;
+//    }
+//
+//}
 //
 //
 //

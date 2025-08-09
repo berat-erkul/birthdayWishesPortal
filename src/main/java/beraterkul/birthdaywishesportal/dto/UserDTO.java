@@ -3,11 +3,11 @@ package beraterkul.birthdaywishesportal.dto;
 
 import beraterkul.birthdaywishesportal.enums.UserRole;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 @NoArgsConstructor
-
 @Data
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String password;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private UserRole role;
-
 }

@@ -65,7 +65,7 @@
 <div class="container">
   <h2>Kullanıcı Güncelle</h2>
 
-  <form th:action="@{/userDTO/update}" th:object="${userDTO}" method="post">
+  <form th:action="@{/user/update/{mail}}" th:object="${user}" method="post">
     <label for="firstName">Ad</label>
     <input type="text" id="firstName" th:field="*{firstName}" required />
 
@@ -76,7 +76,7 @@
     <input type="email" id="email" th:field="*{email}" required />
 
     <label for="password">Şifre</label>
-    <input type="password" id="password" th:field="*{password}" required />
+    <input id="password" th:field="*{password}" required />
 
     <label for="birthday">Doğum Günü</label>
     <input type="date" id="birthday" th:field="*{birthday}" required />
@@ -89,7 +89,9 @@
       <option value="ADMIN">Admin</option>
     </select>
 
-    <button type="submit">Güncelle</button>
+    <input type="hidden" th:field="*{id}" />
+
+    <button th:href="@{/user/update/{mail}(mail=${user.email})}" type="submit">Güncelle</button>
   </form>
 </div>
 

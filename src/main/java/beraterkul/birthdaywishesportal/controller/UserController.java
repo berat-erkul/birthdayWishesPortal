@@ -26,39 +26,42 @@ public class UserController {
 
     @PostMapping("/user/create")
     public String create(@ModelAttribute("user") UserDTO userDTO, Model model) {
+
+        System.out.println("---------------------------------------");
+        System.out.println("/USER/CREATE POST METHOD CALLED");
+        System.out.println("---------------------------------------");
+
         userService.save(userDTO);
         return "redirect:/user/list";
     }
 
-    //********************************
-    @GetMapping("/user/update/{id}")
-    public String update(@PathVariable("id") Long id, Model model) {
+    @GetMapping("/user/update/{mail}")
+    public String update(@PathVariable("mail") String mail, Model model) {
+        UserDTO userDTO = userService.findByEmail(mail);
 
+        System.out.println("User found: " + userDTO.toString());
 
-        return "user/update"; // Aynı form, ama dolu haliyle
-        // findByUserID(String id)
+        model.addAttribute("user", userDTO);
+        return "user/update";
     }
 
-    //********************************
-    @PostMapping("/user/update/{id}")
-    public String update(@PathVariable("id") String id, @ModelAttribute("user") UserDTO userDTO, Model model) {
+    @PostMapping("/user/update/{mail}")
+    public String update(@PathVariable("mail") String mail, @ModelAttribute("user") UserDTO user, Model model) {
 
+        model.addAttribute("user", userService.updateUser(user));
 
-
-        return "user/list";
-        // updateUserByID(UserDTO userDTO, String id)
+        userService.updateUser(user);
+        return "redirect:/user/list";
     }
 
-    //********************************
-    @GetMapping("/user/delete/{id}")
-    public String delete(@PathVariable("id") String id, Model model) {
-
-
-
-        return "user/list";
-        // deleteUserByID(String id)
+    //--------------------------------------------------------------------------
+    @GetMapping("/user/delete/{mail}")
+    public String delete(@PathVariable("mail") String mail, Model model) {
+        userService.delete(mail);
+        System.out.println("User with email " + mail + " deleted.");
+        return "redirect:/user/list";
     }
-
+    //--------------------------------------------------------------------------
 
     @GetMapping("/user/list")
     public String list(Model model) {

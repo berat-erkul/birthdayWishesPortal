@@ -12,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 
-
 @MappedSuperclass
 public class BaseEntity {
 
@@ -20,6 +19,6 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean isDeleted = false;
+    boolean deleted = false;
 
 }

@@ -1,12 +1,12 @@
-//ckage beraterkul.birthdaywishesportal.service;
+//package beraterkul.birthdaywishesportal.service;
 //
-//port beraterkul.birthdaywishesportal.dto.MessageDTO;
-//port beraterkul.birthdaywishesportal.entity.Message;
+//import beraterkul.birthdaywishesportal.dto.MessageDTO;
+//import beraterkul.birthdaywishesportal.entity.Message;
 //
-//port java.time.LocalDate;
-//port java.util.List;
+//import java.time.LocalDate;
+//import java.util.List;
 //
-//blic interface MessageService {
+//public interface MessageService {
 //  List<MessageDTO> findAll();
 //  List<MessageDTO> findByUserId(Long id);
 //  List<MessageDTO> findAllBySenderId(Long id);

@@ -99,10 +99,11 @@
             <td th:text="${userDTO.email}">Email</td>
             <td th:text="${#temporals.format(userDTO.birthday, 'dd.MM.yyyy')}">Doğum Günü</td>
             <td th:text="${userDTO.role}">Rol</td>
+
             <td>
                 <div class="actions">
-                    <a th:href="@{/userDTO/update/{id}(id=${userDTO.id})}" class="btn btn-update">Güncelle</a>
-                    <a th:href="@{/userDTO/delete/{id}(id=${userDTO.id})}" class="btn btn-delete">Sil</a>
+                    <a th:href="@{/user/update/{mail}(mail=${userDTO.email})}" class="btn btn-update">Güncelle</a>
+                    <a th:href="@{/user/delete/{mail}(mail=${userDTO.email})}" class="btn btn-delete">Sil</a>
                 </div>
             </td>
         </tr>
