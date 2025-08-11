@@ -65,16 +65,21 @@
 <div class="message-container">
   <h2 style="text-align: center; margin-bottom: 2rem;">Tüm Mesajlar</h2>
 
-  <div th:each="msg : ${messages}" class="message-card">
+  <div th:each="msg : ${messageDTOs}" class="message-card">
     <div class="message-header" th:text="'Gönderen: ' + ${msg.sender.firstName} + ' ' + ${msg.sender.lastName}">Gönderen</div>
-    <div class="message-date" th:text="${#temporals.format(msg.sentDate, 'dd.MM.yyyy')}">Tarih</div>
+    <!-- <div class="message-date" th:text="${#temporals.format(msg.sentDate, 'dd.MM.yyyy')}">Tarih</div> -->
     <div class="message-content" th:text="${msg.content}">Mesaj içeriği</div>
 
-    <div class="reply-box" th:if="${msg.replyToMessage != null}">
-      <div class="reply-header" th:text="'Yanıtlayan: ' + ${msg.replyToMessage.sender.firstName} + ' ' + ${msg.replyToMessage.sender.lastName}">Yanıtlayan</div>
-      <div class="reply-content" th:text="${msg.replyToMessage.content}">Yanıt içeriği</div>
+    <button th:if="${user.firstName == 'Seda'}">Yanıtlamak için tıklayın :)</button>
+
+
+    <div class="reply-box" th:if="${msg.replyToMessageDTO != null}">
+      <div class="reply-header" th:text="'Yanıtlayan: ' + ${msg.replyToMessageDTO.sender.firstName} + ' ' + ${msg.replyToMessageDTO.sender.lastName}">Yanıtlayan</div>
+      <div class="reply-content" th:text="${msg.replyToMessageDTO.content}">Yanıt içeriği</div>
     </div>
   </div>
+
+
 
 </div>
 

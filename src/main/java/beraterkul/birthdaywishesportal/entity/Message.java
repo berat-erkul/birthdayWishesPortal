@@ -16,11 +16,11 @@ import java.time.LocalDate;
 public class Message extends BaseEntity{
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "sender_id",nullable = false)
     private User sender;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "reciever_id",nullable = false)
     private User receiver;
 
     @Column(nullable = true)

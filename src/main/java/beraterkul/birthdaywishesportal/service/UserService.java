@@ -13,4 +13,5 @@ public interface UserService {
     void delete(String mail);
     boolean updateUser(UserDTO userDTO);
     List<UserDTO> findAll();
+    List<UserDTO> findAllTeachers();
 }

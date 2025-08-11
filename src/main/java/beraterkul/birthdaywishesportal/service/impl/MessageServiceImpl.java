@@ -1,26 +1,29 @@
 package beraterkul.birthdaywishesportal.service.impl;
 
 import beraterkul.birthdaywishesportal.dto.MessageDTO;
+import beraterkul.birthdaywishesportal.dto.UserDTO;
 import beraterkul.birthdaywishesportal.entity.Message;
+import beraterkul.birthdaywishesportal.enums.UserRole;
 import beraterkul.birthdaywishesportal.mapper.MapperUtil;
 import beraterkul.birthdaywishesportal.repository.MessageRepository;
+import beraterkul.birthdaywishesportal.repository.UserRepository;
 import beraterkul.birthdaywishesportal.service.MessageService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
-import static java.util.Arrays.stream;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
     private final MapperUtil mapper;
+    private final UserRepository userRepository;
 
-    public MessageServiceImpl(MessageRepository messageRepository, MapperUtil mapper) {
+    public MessageServiceImpl(MessageRepository messageRepository, MapperUtil mapper, UserRepository userRepository) {
         this.messageRepository = messageRepository;
         this.mapper = mapper;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -31,17 +34,26 @@ public class MessageServiceImpl implements MessageService {
                 .toList();
     }
 
-    @Override
+    @Override //I don't think this is needed, but let's keep it for now
     public List<MessageDTO> findByUserId(Long id) {
         return List.of();
     }
 
     @Override
     public List<MessageDTO> findAllBySenderId(Long id) {
-        return List.of();
+        UserDTO user = mapper.convert(userRepository.getById(id), UserDTO.class);
+
+        System.out.println("Role in DTO: " + user.getRole());
+        System.out.println("Type: " + user.getRole().getClass());
+
+        if(user.getRole().getValue().equalsIgnoreCase(UserRole.STUDENT.getValue())){
+            List<Message> messages = messageRepository.findAllBySender_Id(id);
+            return messages.stream().map(message -> mapper.convert(message, MessageDTO.class)).toList();
+        }
+
+        List<Message> messages = messageRepository.findAll();
+        return messages.stream().map(message -> mapper.convert(message, MessageDTO.class)).toList();
     }
-
-
 
     @Override
     public List<MessageDTO> findLastMessages() {
@@ -53,12 +65,15 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public MessageDTO getById(Long id) {
-        return null;
+        return mapper.convert(messageRepository.getById(id), MessageDTO.class);
     }
 
     @Override
     public MessageDTO save(MessageDTO message) {
-        return null;
+        messageRepository.save(mapper.convert(message, Message.class));
+        // We'll set date etc here
+
+        return message;
     }
 
 }

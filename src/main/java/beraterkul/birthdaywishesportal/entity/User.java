@@ -1,9 +1,7 @@
 package beraterkul.birthdaywishesportal.entity;
 
 import beraterkul.birthdaywishesportal.enums.UserRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,6 +34,7 @@ public class User extends BaseEntity {
     private LocalDate birthday; //0404
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
 }

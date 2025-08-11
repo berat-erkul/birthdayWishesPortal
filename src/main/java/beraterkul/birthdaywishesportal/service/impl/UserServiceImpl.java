@@ -5,6 +5,7 @@ import beraterkul.birthdaywishesportal.entity.User;
 import beraterkul.birthdaywishesportal.mapper.MapperUtil;
 import beraterkul.birthdaywishesportal.repository.UserRepository;
 import beraterkul.birthdaywishesportal.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getById(long id) {
-        return null;
+        return userRepository.findById(id)
+                .map(user -> mapper.convert(user, UserDTO.class))
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
     }
 
     @Override
     public UserDTO getByFirstName(String firstName) {
-        return null;
+        return mapper.convert(userRepository.getByFirstName(firstName), UserDTO.class);
     }
 
     @Override
@@ -96,5 +99,16 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
 
     }
+
+    @Override
+    public List<UserDTO> findAllTeachers() {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getRole() != null
+                        && "TEACHER".equalsIgnoreCase(user.getRole().getValue()))
+                .map(user -> mapper.convert(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
+
+
 
 }

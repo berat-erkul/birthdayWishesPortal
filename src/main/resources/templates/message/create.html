@@ -42,7 +42,7 @@
       color: #555;
     }
 
-    input[type="text"], textarea {
+    input[type="text"], textarea, select {
       width: 100%;
       padding: 10px 12px;
       border-radius: 6px;
@@ -53,7 +53,8 @@
     }
 
     input[type="text"]:focus,
-    textarea:focus {
+    textarea:focus,
+    select:focus {
       border-color: #007bff;
       outline: none;
     }
@@ -109,13 +110,14 @@
     <!-- Receiver -->
     <div class="form-group">
       <label for="receiver">Receiver</label>
-      <input type="text" id="receiver" th:field="*{receiver}" placeholder="Enter receiver name">
-    </div>
-
-    <!-- Subject -->
-    <div class="form-group">
-      <label for="subject">Subject</label>
-      <input type="text" id="subject" th:field="*{subject}" placeholder="Enter subject">
+      <!-- Kullanıcı listesi dropdown -->
+      <select id="receiver" th:field="*{receiver.id}">
+        <option value="" disabled selected>Select a receiver</option>
+        <option th:each="user : ${teachers}"
+                th:value="${user.id}"
+                th:text="${user.firstName} + ' ' + ${user.lastName}">
+        </option>
+      </select>
     </div>
 
     <!-- Content -->
