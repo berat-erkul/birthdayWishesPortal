@@ -27,10 +27,6 @@ public class UserController {
     @PostMapping("/user/create")
     public String create(@ModelAttribute("user") UserDTO userDTO, Model model) {
 
-        System.out.println("---------------------------------------");
-        System.out.println("/USER/CREATE POST METHOD CALLED");
-        System.out.println("---------------------------------------");
-
         userService.save(userDTO);
         return "redirect:/user/list";
     }
@@ -69,5 +65,28 @@ public class UserController {
         return "user/list";
     }
 
+
+
+
+
+    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new UserDTO());
+        return "user/login";
+    }
+
+    //------------------------------------------------------------------------------------
+
+    @GetMapping("/welcome/admin")
+    public String welcome() {
+
+        return "welcome/admin";
+    }
 
 }

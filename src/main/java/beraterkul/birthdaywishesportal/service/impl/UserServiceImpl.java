@@ -8,6 +8,7 @@ import beraterkul.birthdaywishesportal.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +17,15 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final MapperUtil mapper;
 
     // ******************* - Using @Lazy to avoid circular dependency issues - *******************
-    public UserServiceImpl(UserRepository userRepository, MapperUtil mapper, @Lazy UserService userService) {
+    public UserServiceImpl(UserRepository userRepository, MapperUtil mapper, @Lazy UserService userService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -40,12 +43,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO save(UserDTO userDTO) {
 
-        System.out.println("---------------------------------------");
-        System.out.println("/USER/SAVE POST METHOD CALLED");
-        System.out.println("---------------------------------------");
-
         if(!existsByEmail(userDTO.getEmail())){
-            userRepository.save(mapper.convert(userDTO, User.class));
+            User user = mapper.convert(userDTO, User.class);
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            userRepository.save(user);
         }else{
             //throw new RuntimeException("User with email " + userDTO.getEmail() + " already exists.");
         }
